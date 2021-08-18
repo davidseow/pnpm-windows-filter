@@ -19,4 +19,4 @@ jobs:
       - name: install dependencies
         run: pnpm i --frozen-lockfile
       - name: Run tests (only on updated packages)
-        run: pnpm --filter "{./packages}[$COMMIT_SHA]" testt
+        run: pnpm --filter "{./packages}[$COMMIT_SHA]" test
