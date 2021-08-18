@@ -1,0 +1,26 @@
+name: Testing
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-tests:
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.13.0
+      - name: install dependencies
+        run: pnpm i --frozen-lockfile
+      - name: Run tests (only on updated packages)
+        run: |
+          echo "GITHUB_SHA:" $GITHUB_SHA
+          echo "GITHUB_SHA:" $env:GITHUB_SHA
+          pnpm test --filter "{packages}[ab6a6f6cd14ae4e61dc211c768aaab950b53ef10]"
+          pnpm test --filter "[ab6a6f6cd14ae4e61dc211c768aaab950b53ef10]"
