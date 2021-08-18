@@ -1,0 +1,22 @@
+name: Testing
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-tests:
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.7.1
+      - name: install dependencies
+        run: pnpm i --frozen-lockfile
+      - name: Run tests (only on updated packages)
+        run: pnpm --filter "{./packages}[$COMMIT_SHA]" testt
