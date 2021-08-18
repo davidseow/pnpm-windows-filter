@@ -21,8 +21,7 @@ jobs:
         run: pnpm i --frozen-lockfile
       - name: Run tests (only on updated packages)
         run: |
-          echo "GITHUB_SHA:" $GITHUB_SHA
-          echo "GITHUB_SHA:" $env:GITHUB_SHA
-          pnpm test --filter "{packages}[$GITHUB_SHA]"
+          echo "GITHUB_SHA:" $GITHUB_SHA $env:GITHUB_SHA
+          # pnpm test --filter "{apps}"
+          pnpm test --filter "{apps}[$GITHUB_SHA]"
           pnpm test --filter "[$GITHUB_SHA]"
-          pnpm test --filter "[origin/main...origin/feature/test1]"
