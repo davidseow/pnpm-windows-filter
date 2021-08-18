@@ -1,0 +1,32 @@
+name: Testing
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  run-tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.14.5
+
+      - name: Get branch's first commit sha
+        uses: ./.github/actions/git-branch-sha
+
+      - name: install dependencies
+        run: pnpm i --frozen-lockfile
+
+      - name: Run tests (only on updated packages)
+        run: pnpm test --filter "{packages}[$COMMIT_SHA]"

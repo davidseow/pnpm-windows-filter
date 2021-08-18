@@ -1,0 +1,7 @@
+name: "Get branch first commit sha"
+
+description: "Get branch first commit sha"
+
+runs:
+  using: node12
+  main: dist/index.js
