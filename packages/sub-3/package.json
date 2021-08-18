@@ -1,0 +1,12 @@
+{
+  "name": "sub-3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest sub-3"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
