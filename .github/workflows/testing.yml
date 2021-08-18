@@ -21,4 +21,4 @@ jobs:
       - name: Run tests (only on updated packages)
         run: |
           echo "GITHUB_SHA:" $GITHUB_SHA
-          pnpm --filter "{./packages}[$GITHUB_SHA]" test
+          pnpm --filter "[$GITHUB_SHA]" test
