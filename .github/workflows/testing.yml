@@ -25,3 +25,4 @@ jobs:
           echo "GITHUB_SHA:" $env:GITHUB_SHA
           pnpm test --filter "{packages}[$GITHUB_SHA]"
           pnpm test --filter "[$GITHUB_SHA]"
+          pnpm test --filter "[origin/main...origin/feature/test1]"
