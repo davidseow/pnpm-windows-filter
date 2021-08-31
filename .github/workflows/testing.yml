@@ -10,7 +10,7 @@ jobs:
   run-tests:
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest]
+        os: [ubuntu-latest] # windows-latest,
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
@@ -22,6 +22,4 @@ jobs:
       - name: Run tests (only on updated packages)
         run: |
           echo "GITHUB_SHA:" $GITHUB_SHA $env:GITHUB_SHA
-          # pnpm test --filter "{apps}"
-          pnpm test --filter "{apps}[$GITHUB_SHA]"
-          pnpm test --filter "[$GITHUB_SHA]"
+          pnpm test --filter "{apps}[6676cace1e8c596d790bac23144494f1ab4312b1]"
