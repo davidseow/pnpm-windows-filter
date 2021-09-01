@@ -17,9 +17,12 @@ jobs:
       - uses: pnpm/action-setup@v2.0.1
         with:
           version: 6.13.0
+      - name: Get commit sha
+        uses: ./.github/actions/git-branch-sha
       - name: install dependencies
         run: pnpm i --frozen-lockfile
       - name: Run tests (only on updated packages)
         run: |
           echo "GITHUB_SHA:" $GITHUB_SHA $env:GITHUB_SHA
-          pnpm test --filter "{apps}[8dd60a3a45913edac3bda5965dd3dd3aedd6db34]"
+          echo "COMMIT_SHA:" $COMMIT_SHA $env:COMMIT_SHA
+          pnpm test --filter "...{apps}[$COMMIT_SHA]"

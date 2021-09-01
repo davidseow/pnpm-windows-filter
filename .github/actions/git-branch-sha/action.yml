@@ -1,0 +1,7 @@
+name: "Get commit sha"
+
+description: "Get commit sha"
+
+runs:
+  using: node12
+  main: dist/index.js
