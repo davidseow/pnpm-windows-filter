@@ -28,5 +28,10 @@ jobs:
       - name: install dependencies
         run: pnpm i --frozen-lockfile
 
-      - name: Run tests (only on updated packages)
+      - name: Run tests (only on updated packages, win)
+        if: matrix.os == 'windows-latest'
+        run: pnpm test --filter "{packages}[$env:COMMIT_SHA]"
+
+      - name: Run tests (only on updated packages, others)
+        if: matrix.os != 'windows-latest'
         run: pnpm test --filter "{packages}[$COMMIT_SHA]"
